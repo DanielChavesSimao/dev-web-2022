@@ -1,13 +1,54 @@
 package devweb.mensalistas;
 
+import java.sql.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import devweb.mensalistas.model.Jogador;
+import devweb.mensalistas.repository.JogadorRepository;
 
 @SpringBootApplication
 public class MensalistasApplication {
+
+	private static final Logger log = LoggerFactory.getLogger(MensalistasApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(MensalistasApplication.class, args);
 	}
 
+	@Bean
+	public CommandLineRunner demo(JogadorRepository repository) {
+		return (args) -> {
+			// Cria uns jogadores
+			repository.save(new Jogador("Daniel", "daniel@email.com", Date.valueOf("2000-01-10")));
+
+			// Busca todos os jogadores
+			log.info("Jogadores encontrados com findAll():");
+			log.info("-------------------------------");
+			for (Jogador jogador : repository.findAll()) {
+				log.info(jogador.toString());
+			}
+			log.info("");
+
+			// Encontra um jogador pelo cod_jogador
+			Jogador jogador = repository.findById(2L);
+			log.info("jogador found with findByCod_Jogador(2L):");
+			log.info("--------------------------------");
+			log.info(jogador.toString());
+			log.info("");
+
+			// Busca jogadores pelo nome
+			log.info("Jogador encontrado por findByNome('Daniel'):");
+			log.info("--------------------------------------------");
+			repository.findByNome("Daniel").forEach(daniel -> {
+				log.info(daniel.toString());
+			});
+			log.info("");
+		};
+	}
 }

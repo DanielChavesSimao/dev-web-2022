@@ -1,9 +1,13 @@
 package devweb.mensalistas.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
 import devweb.mensalistas.model.Jogador;
 
-public interface JogadorRepository extends JpaRepository<Jogador, Long> {
-    
+
+public interface JogadorRepository extends CrudRepository<Jogador, Long> {
+    List<Jogador> findByNome(String nome);
+
+    Jogador findById(long cod_jogador);
 }
