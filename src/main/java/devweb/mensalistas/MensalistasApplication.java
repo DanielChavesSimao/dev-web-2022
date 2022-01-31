@@ -37,15 +37,15 @@ public class MensalistasApplication {
 
 			// Encontra um jogador pelo cod_jogador
 			Jogador jogador = repository.findById(2L);
-			log.info("jogador found with findByCod_Jogador(2L):");
+			log.info("jogador found with findById(2L):");
 			log.info("--------------------------------");
 			log.info(jogador.toString());
 			log.info("");
 
 			// Busca jogadores pelo nome
-			log.info("Jogador encontrado por findByNome('Daniel'):");
+			log.info("Jogador encontrado por findByNomeContaining('Daniel'):");
 			log.info("--------------------------------------------");
-			repository.findByNome("Daniel").forEach(daniel -> {
+			repository.findByNomeContaining("Daniel").forEach(daniel -> {
 				log.info(daniel.toString());
 			});
 			log.info("");
