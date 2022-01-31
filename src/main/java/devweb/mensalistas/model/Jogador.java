@@ -1,21 +1,29 @@
 package devweb.mensalistas.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "jogador")
 public class Jogador implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long cod_jogador;
+    private long codJogador;
 
     @Column(name = "nome")
     private String nome;
@@ -23,24 +31,38 @@ public class Jogador implements Serializable {
     @Column(name = "email")
     private String email;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_nasc")
-    private Date data_nasc;
+    private Date dataNasc;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "jogador_cod_jogador")
+    @JsonManagedReference
+    private List<Pagamento> pagamentos;
+
+    public List<Pagamento> getPagamentos() {
+        return pagamentos;
+    }
+
+    public void setPagamentos(List<Pagamento> pagamentos) {
+        this.pagamentos = pagamentos;
+    }
 
     protected Jogador() {
     }
 
-    public Jogador(String nome, String email, Date data_nasc) {
+    public Jogador(String nome, String email, Date dataNasc) {
         this.nome = nome;
         this.email = email;
-        this.data_nasc = data_nasc;
+        this.dataNasc = dataNasc;
     }
 
-    public long getCod_jogador() {
-        return cod_jogador;
+    public long getCodJogador() {
+        return codJogador;
     }
 
-    public void setCod_jogador(long cod_jogador) {
-        this.cod_jogador = cod_jogador;
+    public void setCodJogador(long codJogador) {
+        this.codJogador = codJogador;
     }
 
     public String getNome() {
@@ -59,17 +81,17 @@ public class Jogador implements Serializable {
         this.email = email;
     }
 
-    public Date getData_nasc() {
-        return data_nasc;
-    }
-
-    public void setData_nasc(Date data_nasc) {
-        this.data_nasc = data_nasc;
+    public Date getDataNasc() {
+        return dataNasc;
     }
 
     @Override
     public String toString() {
-        return "Jogador [cod_jogador=" + cod_jogador + ", data_nasc=" + data_nasc + ", email=" + email + ", nome="
-                + nome + "]";
+        return "Jogador [codJogador=" + codJogador + ", dataNasc=" + dataNasc + ", email=" + email + ", nome=" + nome
+                + ", pagamentos=" + pagamentos + "]";
+    }
+
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
     }
 }

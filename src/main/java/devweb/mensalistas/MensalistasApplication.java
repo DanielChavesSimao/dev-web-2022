@@ -15,13 +15,13 @@ import devweb.mensalistas.repository.JogadorRepository;
 @SpringBootApplication
 public class MensalistasApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(MensalistasApplication.class);
+	// private static final Logger log = LoggerFactory.getLogger(MensalistasApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(MensalistasApplication.class, args);
 	}
 
-	@Bean
+	/* @Bean
 	public CommandLineRunner demo(JogadorRepository repository) {
 		return (args) -> {
 			// Cria uns jogadores
@@ -50,5 +50,5 @@ public class MensalistasApplication {
 			});
 			log.info("");
 		};
-	}
+	} */
 }
