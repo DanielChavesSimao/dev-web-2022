@@ -1,13 +1,24 @@
 package devweb.mensalistas.model;
 
-import javax.persistence.*;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name="pagamento")
-public class Pagamento {
+public class Pagamento implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long cod_pagamento;
+    private long codPagamento;
 
     @Column(name="ano")
     private short ano;
@@ -18,25 +29,33 @@ public class Pagamento {
     @Column(name="valor")
     private float valor;
 
-    @Column(name="cod_jogador")
-    private long cod_jogador;
+    @ManyToOne
+    @JsonBackReference
+    private Jogador jogador;
     
+    public long getCodPagamento() {
+        return codPagamento;
+    }
+
+    public void setCodPagamento(long codPagamento) {
+        this.codPagamento = codPagamento;
+    }
+
+    public Jogador getJogador() {
+        return jogador;
+    }
+
+    public void setJogador(Jogador jogador) {
+        this.jogador = jogador;
+    }
+
     public Pagamento(){}
 
-    public Pagamento(long cod_pagamento, short ano, byte mes, float valor, long cod_jogador) {
-        this.cod_pagamento = cod_pagamento;
+    public Pagamento(long codPagamento, short ano, byte mes, float valor) {
+        this.codPagamento = codPagamento;
         this.ano = ano;
         this.mes = mes;
         this.valor = valor;
-        this.cod_jogador = cod_jogador;
-    }
-
-    public long getCod_pagamento() {
-        return cod_pagamento;
-    }
-
-    public void setCod_pagamento(long cod_pagamento) {
-        this.cod_pagamento = cod_pagamento;
     }
 
     public short getAno() {
@@ -63,12 +82,10 @@ public class Pagamento {
         this.valor = valor;
     }
 
-    public long getCod_jogador() {
-        return cod_jogador;
-    }
-
-    public void setCod_jogador(long cod_jogador) {
-        this.cod_jogador = cod_jogador;
+    @Override
+    public String toString() {
+        return "Pagamento [ano=" + ano + ", codPagamento=" + codPagamento + ", jogador=" + jogador + ", mes=" + mes
+                + ", valor=" + valor + "]";
     }
 
     
