@@ -7,7 +7,7 @@ import devweb.mensalistas.model.Jogador;
 
 
 public interface JogadorRepository extends CrudRepository<Jogador, Long> {
-    List<Jogador> findByNome(String nome);
+    List<Jogador> findByNomeContaining(String nome);
 
     Jogador findById(long cod_jogador);
 }

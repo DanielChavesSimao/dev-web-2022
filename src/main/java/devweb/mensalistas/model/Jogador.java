@@ -1,5 +1,6 @@
 package devweb.mensalistas.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "jogador")
-public class Jogador {
+public class Jogador implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long cod_jogador;
@@ -25,8 +26,7 @@ public class Jogador {
     @Column(name = "data_nasc")
     private Date data_nasc;
 
-    public Jogador() {
-
+    protected Jogador() {
     }
 
     public Jogador(String nome, String email, Date data_nasc) {
