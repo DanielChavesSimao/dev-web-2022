@@ -1,16 +1,7 @@
 package devweb.mensalistas;
 
-import java.sql.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import devweb.mensalistas.model.Jogador;
-import devweb.mensalistas.repository.JogadorRepository;
 
 @SpringBootApplication
 public class MensalistasApplication {
