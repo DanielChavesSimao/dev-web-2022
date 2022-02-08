@@ -38,10 +38,6 @@ public class Pagamento implements Serializable{
         return codPagamento;
     }
 
-    public void setCodPagamento(long codPagamento) {
-        this.codPagamento = codPagamento;
-    }
-
     public Jogador getJogador() {
         return jogador;
     }
@@ -52,8 +48,7 @@ public class Pagamento implements Serializable{
 
     public Pagamento(){}
 
-    public Pagamento(long codPagamento, short ano, byte mes, float valor) {
-        this.codPagamento = codPagamento;
+    public Pagamento(short ano, byte mes, float valor) {
         this.ano = ano;
         this.mes = mes;
         this.valor = valor;

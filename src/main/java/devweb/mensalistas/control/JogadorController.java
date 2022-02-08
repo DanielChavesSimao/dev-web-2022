@@ -2,8 +2,8 @@ package devweb.mensalistas.control;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,12 +53,29 @@ public class JogadorController {
     }
 
     @GetMapping("/{id}")
-    public Jogador show(@PathVariable long id) {
-        return this.jogadorRepository.findById(id);
+    public ResponseEntity<Jogador> show(@PathVariable long id) {
+        Optional<Jogador> data = this.jogadorRepository.findById(id);
+
+        if (data.isPresent())
+            return new ResponseEntity<>(data.get(), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}/pagamentos")
-    public Iterable<Pagamento> showPagamentosDoJogador(@PathVariable long id) {
-        return this.jogadorRepository.findById(id).getPagamentos();
+    public ResponseEntity<List<Pagamento>> showPagamentosDoJogador(@PathVariable long id) {
+        Optional<Jogador> jogador = this.jogadorRepository.findById(id);
+
+        if (jogador.isPresent()){
+            List<Pagamento> pagamentos = jogador.get().getPagamentos();
+
+            if (pagamentos.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(pagamentos, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
