@@ -37,7 +37,7 @@ public class Jogador implements Serializable {
 
     @OneToMany(mappedBy = "jogador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<Pagamento> pagamentos;
+    protected List<Pagamento> pagamentos;
 
     public List<Pagamento> getPagamentos() {
         return pagamentos;

@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -31,8 +32,9 @@ public class Pagamento implements Serializable{
     private float valor;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "jogador_cod_jogador", nullable = false)
     @JsonBackReference
-    private Jogador jogador;
+    protected Jogador jogador;
     
     public long getCodPagamento() {
         return codPagamento;
@@ -48,7 +50,7 @@ public class Pagamento implements Serializable{
 
     public Pagamento(){}
 
-    public Pagamento(short ano, byte mes, float valor) {
+    public Pagamento(short ano, byte mes, float valor, long co) {
         this.ano = ano;
         this.mes = mes;
         this.valor = valor;
