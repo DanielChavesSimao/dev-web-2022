@@ -7,15 +7,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import devweb.mensalistas.model.Jogador;
-import devweb.mensalistas.model.Pagamento;
 import devweb.mensalistas.repository.JogadorRepository;
 
 @RestController
@@ -25,10 +26,14 @@ public class JogadorController {
     private JogadorRepository jogadorRepository;
 
     @GetMapping("")
-    public ResponseEntity<List<Jogador>> listar() {
+    public ResponseEntity<List<Jogador>> listar(@RequestParam(required = false) String nome) {
         try {
             List<Jogador> jogadores = new ArrayList<Jogador>();
-            this.jogadorRepository.findAll().forEach(jogadores::add);
+
+            if (nome == null)
+                this.jogadorRepository.findAll().forEach(jogadores::add);
+            else
+                this.jogadorRepository.findByNomeContaining(nome).forEach(jogadores::add);
 
             if (jogadores.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,6 +57,19 @@ public class JogadorController {
         }
     }
 
+    @DeleteMapping("")
+    public ResponseEntity<HttpStatus> deleteAll()
+    {
+        try {
+            this.jogadorRepository.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Jogador> show(@PathVariable long id) {
         Optional<Jogador> data = this.jogadorRepository.findById(id);
@@ -62,20 +80,4 @@ public class JogadorController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{id}/pagamentos")
-    public ResponseEntity<List<Pagamento>> showPagamentosDoJogador(@PathVariable long id) {
-        Optional<Jogador> jogador = this.jogadorRepository.findById(id);
-
-        if (jogador.isPresent()){
-            List<Pagamento> pagamentos = jogador.get().getPagamentos();
-
-            if (pagamentos.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(pagamentos, HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 }
