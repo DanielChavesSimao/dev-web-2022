@@ -10,7 +10,7 @@
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | `/jogadores` | ✅Busca todos os jogadores, ou filtra por nome (`?nome=Nome`). | ✅Cria um novo jogador. | ❌ | ✅Apaga todos os jogadores. |
 | `/jogadores/{cod_jogador}` | ✅Recupera os dados do jogador escolhido. | ❌ | ⚠️Atualiza o jogador escolhido. | ⚠️Remove o jogador escolhido. |
-| `/jogadores/{cod_jogador}/pagamentos` | ✅Recupera os pagamentos do jogador escolhido. | ✅Cria um pagamento para o jogador escolhido. | ❌ | ⚠️Remove os pagamentos do jogador escolhido. |
-| `/jogadores/{cod_jogador}/pagamentos/{cod_pagamento}` | ❌ | ❌ | ⚠️Atualiza o pagamento do jogador. | ⚠️Remove o pagamento do jogador. |
+| `/jogadores/{cod_jogador}/pagamentos` | ✅Recupera os pagamentos do jogador escolhido. | ✅Cria um pagamento para o jogador escolhido. | ❌ | ✅Remove os pagamentos do jogador escolhido. |
+| `/jogadores/{cod_jogador}/pagamentos/{cod_pagamento}` | ❌ | ❌ | ❌ | ❌ |
 | `/pagamentos` | ✅Busca todos os pagamentos. | ❌ | ❌ | ✅Apaga todos os pagamentos. |
-| `/pagamentos/{cod_pagamento}` | ❌ | ❌ | ❌ | ✅Deleta o pagamento. |
+| `/pagamentos/{cod_pagamento}` | ❌ | ❌ | ✅Atualiza o pagamento. | ✅Deleta o pagamento. |

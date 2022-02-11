@@ -35,7 +35,7 @@ public class Jogador implements Serializable {
     @Column(name = "data_nasc")
     private Date dataNasc;
 
-    @OneToMany(mappedBy = "jogador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jogador", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JsonManagedReference
     protected List<Pagamento> pagamentos;
 
