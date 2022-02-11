@@ -144,15 +144,17 @@ public class PagamentoController {
     @DeleteMapping("jogadores/{jogadorId}/pagamentos")
     public ResponseEntity<HttpStatus> deleteAllFromJogador(@PathVariable("jogadorId") long jogadorId) {
         try {
-            Optional<Jogador> jogador = this.jogadorRepository.findById(jogadorId);
-            if (jogador.isPresent()) {
-                List<Pagamento> pagamentos = jogador.get().getPagamentos();
+            Optional<Jogador> dadosJogador = this.jogadorRepository.findById(jogadorId);
+            if (dadosJogador.isPresent()) {
+                Jogador jogador = dadosJogador.get();
+                List<Pagamento> pagamentos = jogador.getPagamentos();
                 this.pagamentoRepository.deleteAll(pagamentos);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

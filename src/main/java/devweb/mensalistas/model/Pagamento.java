@@ -12,12 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name="pagamento")
-public class Pagamento implements Serializable{
+public class Pagamento implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long codPagamento;
@@ -33,7 +34,7 @@ public class Pagamento implements Serializable{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "jogador_cod_jogador", nullable = false)
-    @JsonBackReference
+    @JsonIgnore
     protected Jogador jogador;
     
     public long getCodPagamento() {
@@ -50,7 +51,7 @@ public class Pagamento implements Serializable{
 
     public Pagamento(){}
 
-    public Pagamento(short ano, byte mes, float valor, long co) {
+    public Pagamento(short ano, byte mes, float valor) {
         this.ano = ano;
         this.mes = mes;
         this.valor = valor;
@@ -82,7 +83,7 @@ public class Pagamento implements Serializable{
 
     @Override
     public String toString() {
-        return "Pagamento [ano=" + ano + ", codPagamento=" + codPagamento + ", jogador=" + jogador + ", mes=" + mes
+        return "Pagamento [ano=" + ano + ", codPagamento=" + codPagamento + ", jogador=" + jogador.getNome() + ", mes=" + mes
                 + ", valor=" + valor + "]";
     }
 
