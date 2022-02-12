@@ -16,8 +16,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name = "jogador")
 public class Jogador implements Serializable {
@@ -36,7 +34,6 @@ public class Jogador implements Serializable {
     private Date dataNasc;
 
     @OneToMany(mappedBy = "jogador", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JsonManagedReference
     protected List<Pagamento> pagamentos;
 
     public List<Pagamento> getPagamentos() {
@@ -58,10 +55,6 @@ public class Jogador implements Serializable {
 
     public long getCodJogador() {
         return codJogador;
-    }
-
-    public void setCodJogador(long codJogador) {
-        this.codJogador = codJogador;
     }
 
     public String getNome() {
