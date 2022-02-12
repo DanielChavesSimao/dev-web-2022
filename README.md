@@ -9,7 +9,7 @@
 | Rota | GET | POST | PUT | DELETE |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
 | `/jogadores` | ✅Busca todos os jogadores, ou filtra por nome (`?nome=Nome`). | ✅Cria um novo jogador. | ❌ | ✅Apaga todos os jogadores. |
-| `/jogadores/{cod_jogador}` | ✅Recupera os dados do jogador escolhido. | ❌ | ⚠️Atualiza o jogador escolhido. | ⚠️Remove o jogador escolhido. |
+| `/jogadores/{cod_jogador}` | ✅Recupera os dados do jogador escolhido. | ❌ | ✅Atualiza o jogador escolhido. | ✅Remove o jogador escolhido. |
 | `/jogadores/{cod_jogador}/pagamentos` | ✅Recupera os pagamentos do jogador escolhido. | ✅Cria um pagamento para o jogador escolhido. | ❌ | ✅Remove os pagamentos do jogador escolhido. |
 | `/jogadores/{cod_jogador}/pagamentos/{cod_pagamento}` | ❌ | ❌ | ❌ | ❌ |
 | `/pagamentos` | ✅Busca todos os pagamentos. | ❌ | ❌ | ✅Apaga todos os pagamentos. |
