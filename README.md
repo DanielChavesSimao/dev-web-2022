@@ -1,4 +1,10 @@
 # Trabalho SpingBoot DevWeb 2022
+## Nomes
+1. Daniel Chaves Simão
+2. Guilherme Pinheiro Lemos
+3. João Pedro Serafim
+
+## Descrição
 - Entrega: código fonte com descrição da API em repositório GitHub 
 - Equipe: até 3 integrantes 
 - Capa deve conter o nome dos integrantes 
